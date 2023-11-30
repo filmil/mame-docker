@@ -65,7 +65,7 @@ RUN mkdir $HOME
 
 RUN cd /tmp/build/mame \
   && cd mame-mame0261 \
-  && make VERBOSE=1 NO_X11=0 USE_WAYLAND=0 USE_SDL=1 \
+  && make VERBOSE=1 NO_X11=0 USE_WAYLAND=0 \
           SOURCES=src/mame/sfrj/tim011.cpp SUBTARGET=tim011 -j ${NCPU}
 
 VOLUME /src

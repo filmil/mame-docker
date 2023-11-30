@@ -8,6 +8,7 @@ set -euo pipefail
 set -x
 
 CONTAINER_NAME="${CONTAINER_NAME:-mame-docker:latest}"
+IMAGE="${IMAGE:-}"
 
 INTERACTIVE=""
 if sh -c ": >/dev/tty" >/dev/null 2>/dev/null; then
@@ -27,5 +28,5 @@ docker run \
   --net=host \
   "${CONTAINER_NAME}" \
   /bin/bash -c \
-    "/prg/tim011 tim011 \
+    "/prg/tim011 tim011 -flop1 /work/${IMAGE} -sound none \
     "

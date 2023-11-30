@@ -35,7 +35,7 @@ build.stamp: docker/Dockerfile Makefile
 	touch $@
 
 run:
-	env DISK=${DISK} ./run.tim011.sh
+	env DISK=${DISK} IMAGE=${IMAGE} ./run.tim011.sh
 .PHONY: run
 
 clean:
