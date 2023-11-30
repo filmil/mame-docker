@@ -7,9 +7,10 @@
 # Must be set as an env variable before make is invoked.
 HOST_TOOL_ARCHIVE_NAME := ""
 
+IMAGE := "TIM011-Kit.img"
 DISK := ""
 
-CONTAINER_NAME := "mame-docker:latest"
+CONTAINER_NAME := "filipfilmar/mame-docker:latest"
 
 CONTAINER_INSTALL_TARGET_DIR := /opt/Xilinx
 
@@ -20,6 +21,8 @@ SHELL := /bin/bash
 all:
 	@echo "SHELL                        : ${SHELL}"
 	@echo
+	@echo "run by using"
+	@echo "		make run"
 	@echo "build container by using"
 	@echo "		make build"
 .PHONY: all
@@ -34,8 +37,13 @@ build.stamp: docker/Dockerfile Makefile
 		-f $< .
 	touch $@
 
+push: build.stamp
+	docker push ${CONTAINER_NAME}
+.PHONY: push
+
 run:
-	env DISK=${DISK} IMAGE=${IMAGE} ./run.tim011.sh
+	env DISK=${DISK} IMAGE=${IMAGE} CONTAINER_NAME=${CONTAINER_NAME} \
+		./run.tim011.sh
 .PHONY: run
 
 clean:

@@ -18,6 +18,7 @@ fi
 
 readonly VIVADO_PATH="/opt/Xilinx/Vivado/2023.2"
 
+    #"/prg/tim011 -help tim011 -flop1 /work/${IMAGE} -sound none \
 docker run \
   ${INTERACTIVE} \
   -u $(id -u):$(id -g) \
@@ -28,5 +29,9 @@ docker run \
   --net=host \
   "${CONTAINER_NAME}" \
   /bin/bash -c \
-    "/prg/tim011 tim011 -flop1 /work/${IMAGE} -sound none \
+    "/prg/tim011 tim011 \
+      -flop1 /work/${IMAGE} \
+      -window \
+      -sound none \
+      -rompath /work \
     "
