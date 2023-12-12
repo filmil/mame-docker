@@ -16,9 +16,6 @@ if sh -c ": >/dev/tty" >/dev/null 2>/dev/null; then
 	INTERACTIVE="--interactive --tty"
 fi
 
-readonly VIVADO_PATH="/opt/Xilinx/Vivado/2023.2"
-
-    #"/prg/tim011 -help tim011 -flop1 /work/${IMAGE} -sound none \
 docker run \
   ${INTERACTIVE} \
   -u $(id -u):$(id -g) \
@@ -26,12 +23,8 @@ docker run \
   -v "${PWD}:/work:rw" \
   -e DISPLAY="${DISPLAY}" \
   -e HOME="/work" \
+  -e IMAGE="${IMAGE}" \
   --net=host \
   "${CONTAINER_NAME}" \
-  /bin/bash -c \
-    "/prg/tim011 tim011 \
-      -flop1 /work/${IMAGE} \
-      -window \
-      -sound none \
-      -rompath /work \
-    "
+  /bin/bash -c "ls -ld / && /run.sh"
+

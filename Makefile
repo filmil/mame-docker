@@ -30,7 +30,7 @@ all:
 build: build.stamp
 .PHONY: build
 
-build.stamp: docker/Dockerfile Makefile
+build.stamp: docker/Dockerfile Makefile run.sh
 	env DOCKER_BUILDKIT=1 docker build \
 		--build-arg NCPU=${NCPU} \
 		-t ${CONTAINER_NAME} \
@@ -41,7 +41,7 @@ push: build.stamp
 	docker push ${CONTAINER_NAME}
 .PHONY: push
 
-run:
+run: build.stamp
 	env DISK=${DISK} IMAGE=${IMAGE} CONTAINER_NAME=${CONTAINER_NAME} \
 		./run.tim011.sh
 .PHONY: run

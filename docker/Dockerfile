@@ -72,6 +72,17 @@ VOLUME /src
 VOLUME /work
 WORKDIR /work
 
+RUN apt-get install -y \
+  libxinerama-dev \
+  libxtst-dev \
+  ""
+RUN mkdir -p /tmp/build
+RUN cd /tmp/build \
+  && git clone https://github.com/jordansissel/xdotool.git xdotool \
+  && cd xdotool \
+  && make DESTDIR="${PWD}/install" PREFIX=/ install
+
+######################################
 FROM ubuntu:22.04
 
 ARG NCPU=10
@@ -116,6 +127,13 @@ RUN apt-get install -y \
 
 RUN mkdir -p /prg
 COPY --from=build /tmp/build/mame/mame-mame0261/tim011 /prg/tim011
+RUN mkdir -p /usr/local/lib/xdotool
+COPY --from=build /tmp/build/xdotool/install/bin/xdotool /usr/bin/xdotool
+COPY --from=build /tmp/build/xdotool/install/lib/* /usr/lib
+#COPY --from=build /usr/local/lib/xdotool/* /usr/local/lib/xdotool
+
+COPY run.sh /run.sh
+RUN chmod a+rx /run.sh
 
 RUN apt-get install -y \
   alsa-oss
