@@ -7,6 +7,7 @@
 set -x
 
 PROGRAM="${PROGRAM:-r}"
+PROGRAM="$(echo ${PROGRAM} | grep -o .)"
 
 function sendKey () {
     #sleep 1
@@ -58,7 +59,7 @@ sendKey space space Scroll_Lock F11 F10
 sleep 15 
 
 # Run the program.
-sendKey F10 "${PROGRAM}" Return F10
+sendKey F10 ${PROGRAM} Return F10
 #sendKey F10 r Return
 
 sleep 0.5
