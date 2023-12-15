@@ -18,6 +18,7 @@ fi
 
 docker run \
   ${INTERACTIVE} \
+  -p 8080:8080 \
   -u $(id -u):$(id -g) \
   -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
   -v "${PWD}:/work:rw" \
