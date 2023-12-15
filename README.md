@@ -1,4 +1,4 @@
-# mame-docker: tim011
+# mame-docker: tim011 [![Test status](https://github.com/filmil/mame-docker/workflows/Test/badge.svg)](https://github.com/filmil/mame-docker/workflows/Test/badge.svg)
 
 TIM-011 in a docker container.
 
